@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Podsumowanie</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="card">
+    <h1>✨Podróż zaplanowana✨</h1>
+    <p id="summary"></p>
+    <img src="https://media.giphy.com/media/3o7qE1YN7aBOFPRw8E/giphy.gif" alt="Happy couple" style="max-width: 300px; margin-top: 20px;">
+    <p style="margin-top: 20px;">Będę czekać na Ciebie 😏</p>
+  </div>
+
+  <script>
+    const data = localStorage.getItem("randkaData");
+    const miejsce = localStorage.getItem("randkaMiejsce");
+    const jedzenie = localStorage.getItem("randkaJedzenie");
+  
+    const summary = `
+      📅 Data: ${data}
+      📍 Co robimy: ${miejsce}
+      🍽️ Jedzenie i picie: ${jedzenie}
+    `;
+  
+    document.getElementById("summary").innerHTML = summary.replace(/\n/g, "<br>");
+  
+    // --- WYŚLIJ NA DISCORDA ---
+    const webhookURL = "https://discord.com/api/webhooks/1364302219645816832/bL6FFULzYtuWmYcMcGaEnJ5y_4kNHhomjNaL_cwoM1hBpo2rSa7ACj1CqHf7SQAXJh5b"; // ← wklej tu swój webhook URL!
+  
+    const payload = {
+      content: `💌 Nowe zaproszenie na randkę!\n${summary}`
+    };
+  
+    fetch(webhookURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    }).then(response => {
+      if (response.ok) {
+        console.log("Wysłano na Discorda!");
+      } else {
+        console.error("Błąd wysyłania na Discorda 😥");
+      }
+    });
+  </script>
+  
+</body>
+</html>
