@@ -17,7 +17,7 @@
             const dateInput = document.getElementById("date");
             const container = document.getElementById("hearts-container");
         
-            // Ograniczenie daty
+        
             const today = new Date();
             const in3weeks = new Date();
             in3weeks.setDate(today.getDate() + 21);
@@ -25,11 +25,10 @@
             dateInput.min = format(today);
             dateInput.max = format(in3weeks);
         
-            // Serduszka + przekierowanie
             dateInput.addEventListener("change", () => {
               const selectedDate = dateInput.value;
         
-              // Serduszka
+          
               for (let i = 0; i < 20; i++) {
                 const heart = document.createElement("div");
                 heart.className = "heart";
@@ -38,7 +37,6 @@
                 setTimeout(() => heart.remove(), 4000);
               }
         
-              // Zapisz datę i przejdź dalej po 1.5s
               localStorage.setItem("randkaData", selectedDate);
               setTimeout(() => {
                 window.location.href = "miejsce.html";
